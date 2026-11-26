@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3"/></filter>
+  </defs>
+  <rect width="512" height="512" fill="#e9e5dc"/>
+  <g filter="url(#soft)" style="mix-blend-mode:multiply">
+    <circle cx="214" cy="236" r="104" fill="#2338a8" opacity=".8"/>
+    <circle cx="298" cy="276" r="104" fill="#d9487a" opacity=".75"/>
+  </g>
+</svg>
