@@ -11,6 +11,7 @@ import { SettingsPanel } from '../components/SettingsPanel';
 import { Toolbar } from '../components/Toolbar';
 import { ZoomControl } from '../components/ZoomControl';
 import { ExportPanel } from '../export/ExportPanel';
+import { openLaunchedProjects } from '../project/launchFiles';
 import { ReferencePanel } from '../reference/ReferencePanel';
 import { RefFrame } from '../reference/RefFrame';
 import { AppContext, useApp } from './context';
@@ -54,6 +55,8 @@ export function App() {
   useEffect(() => {
     if (app && import.meta.env.DEV) (window as unknown as { app: AppStore; engine: unknown }).app = app, (window as unknown as { engine: unknown }).engine = app.engine;
   }, [app]);
+
+  useEffect(() => { if (app) openLaunchedProjects(app); }, [app]);
 
   if (error) return <div class="error"><p>{error}</p><p class="sub">A browser with WebGL2 is required.</p></div>;
 
