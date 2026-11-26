@@ -31,7 +31,7 @@ export default defineConfig({
       },
       workbox: {
         // the shell is precached; the 3 MB HEIC decoder and the font previews are cached the first time they are used
-        globPatterns: ['**/*.{js,css,html,webmanifest}', 'icons/*.png'],
+        globPatterns: ['**/*.{js,css,html}', 'icons/apple-touch-icon.png'],
         globIgnores: ['**/heic-to-*.js'],
         runtimeCaching: [
           {
