@@ -20,6 +20,9 @@ export default defineConfig({
         orientation: 'any',
         background_color: '#e9e5dc',
         theme_color: '#e9e5dc',
+        file_handlers: [
+          { action: './', accept: { 'application/x-watercolor-project': ['.wcp'] } },
+        ],
         icons: [
           { src: 'icons/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
           { src: 'icons/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
