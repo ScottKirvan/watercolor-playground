@@ -42,11 +42,11 @@ git branch --set-upstream-to=upstream/main upstream-main
    `git switch -c contrib/<topic> upstream/main`
 2. Put only the product change on it, with upstream-style commit messages and no attribution lines. Keep package-lock changes minimal: if it conflicts, take upstream's lockfile and rerun `npm install <package>` instead of resolving it by hand.
 3. Check it as upstream would see it. In a throwaway worktree, run `npm ci && npm run build` on the branch. To also run our tests against it without committing them, copy them in from `main` (`git archive main tests playwright.config.ts vitest.config.ts src/project/<name>.test.ts | tar -x -C <worktree>`), then install the test tools with `npm i --no-save`. Remove the worktree afterwards.
-4. Push the branch to `origin` and open the PR from it to `msurguy/watercolor-playground`. Opening a PR on his repo needs access the Claude session does not have, so that step is done by hand.
+4. Push the branch to `origin` and open the PR from it to `msurguy/watercolor-playground`. Opening a PR on his repo needs access the Claude session does not have, so that step is done by hand. Before opening it, check whether the change adds a dependency or behaviour he may not want on his deployed site, and ask him first if so. Say in the PR that it has no tests, since upstream has none.
 5. Open a PR from the same branch into `main` of this fork, if the feature is not already there. Merge it with rebase and merge.
 6. Tests for the feature go in a follow-on `test:` PR to the fork only, on top of the feature. This is a deliberate exception to the "tests alongside new code" rule in `CLAUDE.md`: the tests land in a separate PR for the same feature, because upstream does not take them.
 
-If a feature was already merged into the fork with its tests in separate commits, as the PWA work was, the contribution branch can be built by cherry-picking just the product commits onto `upstream/main` and squashing them into upstream-style commits.
+If a feature is already merged into the fork with its tests in separate commits, the contribution branch can be built by cherry-picking just the product commits onto `upstream/main` and squashing them into upstream-style commits.
 
 ## When upstream changes
 
@@ -70,9 +70,3 @@ He may merge or squash it, so the commits on his side can differ from ours. Afte
 - A feature in the fork: `git revert` its commits on `main`. Do not reset `main`; release-please reads its history and other branches build on it.
 - A bad upstream sync: reset a throwaway branch to the pre-sync tag and redo it.
 - To see what the fork adds beyond upstream: `git diff upstream-main..main --stat`. It should be the fork-only paths plus any merged contributions not yet accepted upstream.
-
-## Current state
-
-- `contrib/pwa-installable-offline` is on `origin`, built on upstream commit `27ee4e6`, with two commits: the PWA, and opening `.wcp` files launched from the OS. Both are product-only and in upstream's style.
-- Checked in a clean worktree: `npm ci` and `npm run build` pass, and our 16 Vitest and 3 Playwright tests pass against it.
-- Not yet sent upstream. Before opening that PR, decide whether the new dev dependency (`vite-plugin-pwa`) and the service worker on his deployed site are acceptable to him, perhaps by asking him first. Also decide whether to mention that the PR has no tests.
