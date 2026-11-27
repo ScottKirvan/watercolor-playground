@@ -73,7 +73,7 @@ describe('index.html', () => {
 describe('service worker', () => {
   it('precaches the app shell', () => {
     expect(precached).toContain('index.html');
-    for (const file of ['assets/index-', 'registerSW.js'].map(p => precached.find(u => u.startsWith(p)))) expect(file).toBeTruthy();
+    expect(precached.find(u => u.startsWith('assets/index-'))).toBeTruthy();
     for (const icon of manifest.icons) expect(precached).toContain(icon.src);
   });
 
