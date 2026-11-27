@@ -12,10 +12,12 @@ import { Toolbar } from '../components/Toolbar';
 import { ZoomControl } from '../components/ZoomControl';
 import { ExportPanel } from '../export/ExportPanel';
 import { openLaunchedProjects } from '../project/launchFiles';
+import { UpdatePrompt } from '../components/UpdatePrompt';
 import { ReferencePanel } from '../reference/ReferencePanel';
 import { RefFrame } from '../reference/RefFrame';
 import { AppContext, useApp } from './context';
 import { useKeyboard } from './keyboard';
+import { watchForUpdates } from './serviceWorker';
 import { bumpResize } from './resize';
 import type { AppStore } from './store';
 
@@ -44,6 +46,7 @@ function Chrome() {
     <Ghost />
     <DropChoice />
     <FillChoice />
+    <UpdatePrompt />
     <HandOverlay />
   </>;
 }
@@ -57,6 +60,7 @@ export function App() {
   }, [app]);
 
   useEffect(() => { if (app) openLaunchedProjects(app); }, [app]);
+  useEffect(() => { if (app) watchForUpdates(app.updates); }, [app]);
 
   if (error) return <div class="error"><p>{error}</p><p class="sub">A browser with WebGL2 is required.</p></div>;
 
