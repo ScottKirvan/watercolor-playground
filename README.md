@@ -154,7 +154,9 @@ In development, `window.app` and `window.engine` are available in the browser co
 - [spectral.js](https://github.com/rvanwijnen/spectral.js), for the spectral colour data.
 - Single-line fonts (Hershey, EMS, Relief and others) from [drawingbots.net](https://drawingbots.net).
 - [vpype-js](https://github.com/plottertools/vpype-js) for SVG import, [q-floodfill](https://github.com/pavelkukov/q-floodfill) for the fill tool, [heic-to](https://github.com/hoppergee/heic-to) for iPhone photos and [MediaPipe](https://ai.google.dev/edge/mediapipe) for hand tracking.
+- The original [Watercolor](https://github.com/msurguy/watercolor-playground) app by Maksim Surguy (MIT) - where the ScottKirvan fork started
 
+  
 ## License
 
 [MIT](LICENSE). The bundled fonts and third-party code keep their own licenses (SIL Open Font License, Hershey Fonts license, MIT, Apache-2.0, LGPL-3.0). See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
