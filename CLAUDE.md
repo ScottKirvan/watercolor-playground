@@ -24,6 +24,12 @@ Update this file in the same commit as the work it documents.
   rather than chosen by you, verify it against this convention before the first push.
   Rename locally (`git branch -m <name>`) if it doesn't match — being handed a name
   isn't an exemption from the rule.
+- Every branch pushed to the remote gets an open pull request, opened in the same
+  turn as the push (a draft if it is not ready). The owner works from PRs and cannot
+  see branches in a cloud session, so a branch without one looks stale and may be
+  deleted. A branch that is not meant to merge into `main`, such as a contribution
+  staged for another repository, gets a draft PR against a pushed mirror of that
+  repository's branch, titled so it is clearly not for merging.
 - One concern per branch and PR. If work naturally splits into independent problems,
   split the branches too — resist bundling unrelated changes into one PR.
 - Conventional commits: `feat:` / `fix:` / `docs:` / `chore:` / `refactor:` / `test:`.
