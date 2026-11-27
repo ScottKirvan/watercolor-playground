@@ -21,6 +21,7 @@ import { ENGINE_TOOLS, PANEL_TOOLS } from './registry';
 import { bumpView } from './resize';
 import { showToast } from './toast';
 import type { PanelTool, PanelToolDef } from './tools';
+import { UpdateStore } from './updates';
 
 /** An engine tool or the id of a panel tool from the registry. */
 export type UiTool = Tool | string;
@@ -100,6 +101,7 @@ export class AppStore {
   readonly reference: ReferenceStore;
   readonly exporter: ExportStore;
   readonly project: ProjectStore;
+  readonly updates: UpdateStore;
   /** The active panel tool, if the current tool is one. */
   readonly activePanelTool = computed(() => this.panelTools.get(this.tool.value)?.tool ?? null);
 
@@ -128,6 +130,7 @@ export class AppStore {
     this.reference = new ReferenceStore(this.engine);
     this.exporter = new ExportStore(this.engine, () => this.paper.peek().name);
     this.project = new ProjectStore(this);
+    this.updates = new UpdateStore({ hasUnsavedWork: () => this.canUndo.peek(), save: () => this.project.save() });
 
     // mirror state into the engine (paper and reference changes are recorded as undo steps by the actions below)
     effect(() => this.engine.setParams(this.params.value));
@@ -389,6 +392,7 @@ export class AppStore {
 
   /** Escape: the most transient thing goes first. */
   escape() {
+    if (this.updates.step.peek() !== 'idle') { this.updates.later(); return; }
     if (this.dropped.peek()) { this.closeDrop(); return; }
     if (this.reference.askFill.peek()) { this.reference.useForFill(false); return; }
     if (this.reference.stopAdjust()) return;

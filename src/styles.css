@@ -180,14 +180,14 @@ button { font: inherit; color: inherit; }
 /* asks what a dropped image is for */
 .drop-choice { z-index: 7; display: flex; gap: 4px; padding: 6px; }
 .drop-choice button { flex-direction: row; gap: 6px; padding: 8px 12px; }
-.fill-choice {
+.fill-choice, .update-prompt {
   z-index: 7; left: 50%; top: calc(18px + env(safe-area-inset-top)); transform: translateX(-50%);
   display: flex; flex-direction: column; gap: 6px; padding: 10px 10px 6px; max-width: calc(100vw - 32px);
 }
-.fill-choice p { margin: 0 4px; font-size: 12px; color: var(--ink); }
-.fill-choice .row { display: flex; gap: 4px; justify-content: flex-end; flex-wrap: wrap; }
-.fill-choice button { flex-direction: row; gap: 6px; padding: 8px 12px; }
-.fill-choice button span { display: inline; }
+.fill-choice p, .update-prompt p { margin: 0 4px; font-size: 12px; color: var(--ink); }
+.fill-choice .row, .update-prompt .row { display: flex; gap: 4px; justify-content: flex-end; flex-wrap: wrap; }
+.fill-choice button, .update-prompt button { flex-direction: row; gap: 6px; padding: 8px 12px; }
+.fill-choice button span, .update-prompt button span { display: inline; }
 
 .settings .reset { align-self: flex-end; padding: 4px 6px; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; }
 
