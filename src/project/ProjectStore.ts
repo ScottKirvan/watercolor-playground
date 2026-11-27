@@ -22,8 +22,9 @@ export class ProjectStore {
 
   requestOpen() { this.openRequest.value++; }
 
-  async save() {
-    if (this.busy.peek()) return;
+  /** Resolves true once the project file has been handed to the browser. */
+  async save(): Promise<boolean> {
+    if (this.busy.peek()) return false;
     this.busy.value = 'saving';
     try {
       const { app } = this, { engine } = app;
@@ -51,8 +52,10 @@ export class ProjectStore {
       const blob = await writeProject(data);
       downloadBlob(blob, stampedName(PROJECT_EXT));
       showToast(`Saved project · ${formatBytes(blob.size)}`);
+      return true;
     } catch (e) {
       showToast(e instanceof Error ? e.message : 'Could not save the project');
+      return false;
     } finally {
       this.busy.value = null;
     }

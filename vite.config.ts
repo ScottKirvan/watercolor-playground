@@ -10,6 +10,7 @@ export default defineConfig({
     VitePWA({
       // 'prompt' keeps a new service worker waiting until every tab is closed: an automatic reload would wipe an unsaved painting
       registerType: 'prompt',
+      injectRegister: false,
       manifest: {
         name: 'Watercolor',
         short_name: 'Watercolor',
